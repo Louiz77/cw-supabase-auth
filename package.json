@@ -1,0 +1,13 @@
+{
+  "name": "supabase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true,
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.569.0"
+  }
+}
