@@ -25,7 +25,7 @@ def login_rqst():
             user_id = user.dict().get("user").get("id")
             return user_id
         except Exception as e:
-            return f"Error: {e}"
+            return f"Error {e}"
 
 
 @app.route('/get_reg', methods=['GET'])
@@ -38,9 +38,12 @@ def register_rqst():
         email_create = args.get("email")
         try:
             register()
-            return "Registrado com sucesso"
+            #user = supabase.auth.get_user()
+            #user_id = user.dict().get("user").get("id")
+            #return user_id
+            return "login"
         except Exception as e:
-            return f"Error: {e}"
+            return f"Error {e}"
 
 
 @app.route('/get_unl', methods=['GET'])
@@ -52,7 +55,7 @@ def logout_rqst():
             return f"Saiu {user_id}"
             logout()
         except Exception as e:
-            return f"Error: {e}"
+            return f"Error {e}"
 
 
 def login():
@@ -70,5 +73,9 @@ def register():
     cas = supabase.auth.admin.create_user({
         "email": email_create,
         "password": password_create,
-        "email_confirm": True,
+    })
+    gnr = supabase.auth.verify_otp({
+        "type": "signup",
+        "token_hash": "HASH123456",
+        "email": email_create,
     })
